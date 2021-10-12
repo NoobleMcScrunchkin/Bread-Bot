@@ -1,0 +1,74 @@
+doctype html
+include includes/tools.pug
+head
+    title BreadBot
+    link(rel='stylesheet', href='/public/css/base.css')
+    link(rel='stylesheet', href='/public/css/channel.css')
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    script(src="/public/js/channel.js")
+    script(src="/public/js/base.js")
+    script(src="/public/js/socket.io.js")
+body
+    #navButton(onclick="showNav()")
+        .navButtonLine
+        .navButtonLine
+        .navButtonLine
+    #nav
+        ul(class="navBar")
+            li
+                a(class="" href="/")
+                    b Bread Bot
+            li
+                a(class="" href="/servers") Servers
+            li
+                a(class="" href="/about") About
+            li(class="navRight")
+                if login
+                    a(class="" href=`https://discord.com/api/oauth2/authorize?client_id=${clientID}&redirect_uri=${redirectUri}&response_type=code&scope=identify%20email%20guilds`) Login
+                else
+                    if user
+                        a(id="user" href="/logout")
+                            span= user.username
+            
+    #main
+        a(style="color: white; text-decoration: none;" href=`/server/${user.id}/${guild.id}`)
+            h1.title= titleCase(`${guild.name}`)
+    #messages
+        - for (let msgI = messages.length - 1; msgI >= 0; msgI--)
+            - let user = users.find((user) => user.id == messages[msgI].authorID);
+            - let style = ""
+            if user.avatar
+                - style = `background-image: url(https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=128)`
+            div.message
+                div.avatar(style=style)
+                div.username 
+                    b= user.username + "#" + user.discriminator
+                - let content = messages[msgI].cleanContent
+                - if (content == "" && messages[msgI].embedTitle != "")
+                    - content = messages[msgI].embedTitle
+                - content = content.replace(/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig, "<a href='$1'>$1</a>");
+                div.messageContent
+                    | !{content}
+                    - for (let attach in messages[msgI].attUrl)
+                        - if (messages[msgI].attUrl[attach].match(/\.(jpeg|jpg|gif|png)$/) != null)
+                            img(src=messages[msgI].attUrl[attach])
+                        - else
+                            - let splits = messages[msgI].attUrl[attach].split("/")
+                            div(onclick=`location.href = '${messages[msgI].attUrl[attach]}'`)= splits[splits.length - 1]
+    #mainBottom
+        div(style="position: relative")
+            div.autoSelect(id="inpSel")
+                div.autoTitle(id="inpTitleUsers")
+                    b Users
+                div.autoInp(id="inpSelUsers")
+                div.autoTitle(id="inpTitleRoles")
+                    b Roles
+                div.autoInp(id="inpSelRoles")
+                div.autoTitle(id="inpTitleChannels")
+                    b Channels
+                div.autoInp(id="inpSelChannels")
+        div.propInp(id="msgInp" type="text" onMouseUp="" style="color: #aaa;" contenteditable=true onkeydown="handleSend(this, event, '" + user.id + "', '" + guild.id + "')" onkeyup="handleType(this, event)" onclick="handleType(this, event)" onfocus="if (this.textContent == 'Message #" + thisChannel.name + "') { this.textContent = ''; this.style.color = 'white'; }" onblur="if (this.textContent == '') {this.textContent = 'Message #" + thisChannel.name + "'; this.style.color = '#aaa'; }")= "Message #" + thisChannel.name
+script.
+    let rolesArr = JSON.parse(`!{JSON.stringify(roles)}`);
+    let channelsArr = JSON.parse(`!{JSON.stringify(textChannels)}`);
+    let usersArr = JSON.parse(`!{JSON.stringify(users)}`);

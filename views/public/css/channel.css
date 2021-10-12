@@ -1,0 +1,198 @@
+#msgInp {
+    width: 100%;
+    min-height: 28px;
+    border-radius: 8px;
+    color: white;
+    background-color: #383838;
+    font-family: Roboto,Source Sans Pro,Calibri,Arial,sans-serif;
+    font-size: 1.2em;
+    border: 1px solid #444;
+    padding: 6px 0;
+    padding-left: 4px;
+    margin-bottom: 2px;
+    -webkit-user-modify: read-write-plaintext-only;
+    box-sizing: border-box;
+}
+
+#msgInp span {
+    -webkit-user-modify: read-only;
+    user-select: text;
+    outline: none;
+    color: #526fc7;
+    background-color: #526fc722;
+    border-radius: 4px;
+    padding: 2px;
+}
+
+#msgInp:focus{
+    outline: none;
+}
+
+.autoSelect {
+    width: auto;
+    height: auto;
+    display: none;
+    float:left;
+    position: absolute;
+    bottom: 0px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin: 4px 0;
+    min-width: 25%;
+}
+
+.autoTitle {
+    background-color: #383838;
+    border: 1px solid #444;
+    border-radius: 8px 8px 0 0 ;
+    padding: 8px;
+    font-size: 1.08em;
+    position: relative;
+    width: auto;
+    height: auto;
+}
+
+.autoInp {
+    background-color: #383838;
+    border: 1px solid #444;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    padding: 0px;
+    font-size: 1.08em;
+    position: relative;
+    width: auto;
+    height: auto;
+    max-height: 160px;
+    overflow-y: scroll;
+}
+
+#messages {
+    background-color: #333;
+    border-radius: 8px;
+    border: 2px solid #444;
+    top: 125px;
+    bottom: 70px;
+    left: 16px;
+    right: 16px;
+    position: absolute;
+    overflow-y: scroll;
+}
+
+#messages::-webkit-scrollbar {
+    width: 5px;               /* width of the entire scrollbar */
+}
+#messages::-webkit-scrollbar-track {
+    background: #none;        /* color of the tracking area */
+}
+#messages::-webkit-scrollbar-thumb {
+    width: 1px;
+    background-color: #222;    /* color of the scroll thumb */
+    border-radius: 3px;       /* roundness of the scroll thumb */
+    border: 1px solid #222;  /* creates padding around scroll thumb */
+}
+
+.message {
+    position: relative;
+    width: auto;
+    height: auto;
+    min-height: 48px;
+    padding: 8px;
+    border-bottom: 2px solid #444;
+    user-select: text;
+}
+
+.message .avatar {
+    background-color: #222;
+    width: 48px;
+    height: 48px;
+    float: left;
+    border-radius: 50%;
+    background-size: contain;
+    border: 1px solid #444;
+}
+
+.message .username {
+    width: auto;
+    display: block;
+    margin-top: -2px;
+    margin-left: 56px;
+    margin-right: 8px;
+    font-size: 1.1em;
+}
+
+.message .messageContent {
+    width: auto;
+    display: block;
+    margin-left: 56px;
+    margin-right: 8px;
+    margin-top: 4px;
+    word-wrap: break-word;
+}
+
+.message .messageContent a {
+    color: #0bf;
+    text-decoration: none;
+}
+
+.message .messageContent a:hover {
+    text-decoration: underline;
+}
+
+.message .messageContent img {
+    max-width: 50%;
+    display: block;
+    margin-top: 8px;
+}
+
+.message .messageContent div {
+    width: 50%;
+    box-sizing: border-box;
+    height: 48px;
+    background-color: #222;
+    padding: 9px;
+    font-size: 1.3em;
+    color: #44f;
+    border-radius: 8px;
+    border: 2px solid #444;
+    cursor: pointer;
+    display: block;
+    margin-top: 8px;
+}
+
+#inpTitleRoles {
+    margin-top: 4px;
+}
+
+.autoDiv {
+    padding: 8px;
+    border-top: 1px solid #444;
+    cursor: pointer;
+}
+
+
+.autoInp::-webkit-scrollbar {
+    width: 5px;               /* width of the entire scrollbar */
+}
+.autoInp::-webkit-scrollbar-track {
+    background: #none;        /* color of the tracking area */
+}
+.autoInp::-webkit-scrollbar-thumb {
+    width: 1px;
+    background-color: #222;    /* color of the scroll thumb */
+    border-radius: 3px;       /* roundness of the scroll thumb */
+    border: 1px solid #222;  /* creates padding around scroll thumb */
+}
+
+@media only screen and (max-height: 800px) {
+    .autoInp {
+        max-height: 80px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #messages {
+        top: 70px;
+    }
+}

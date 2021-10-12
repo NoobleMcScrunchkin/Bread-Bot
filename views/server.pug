@@ -1,0 +1,95 @@
+doctype html
+include includes/tools.pug
+head
+    title BreadBot
+    link(rel='stylesheet', href='/public/css/base.css')
+    link(rel='stylesheet', href='/public/css/server.css')
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    script(src="/public/js/server.js")
+    script(src="/public/js/base.js")
+body
+    #navButton(onclick="showNav()")
+        .navButtonLine
+        .navButtonLine
+        .navButtonLine
+    #nav
+        ul(class="navBar")
+            li
+                a(class="" href="/")
+                    b Bread Bot
+            li
+                a(class="" href="/servers") Servers
+            li
+                a(class="" href="/about") About
+            li(class="navRight")
+                if login
+                    a(class="" href=`https://discord.com/api/oauth2/authorize?client_id=${clientID}&redirect_uri=${redirectUri}&response_type=code&scope=identify%20email%20guilds`) Login
+                else
+                    if user
+                        a(id="user" href="/logout")
+                            span= user.username
+            
+    #main
+        h1.title= titleCase(`${guild.name}`)
+        .content
+            h1 Modules
+            #modules
+                - let i = 0
+                each value, mod in modules
+                    - let float = "left";
+                    - if (i % 2 != 0)
+                        - float = "right";
+                    - let style = "";
+                    - let modLen = Object.keys(modules).length
+                    - if (i == modLen - 1 && float == "left")
+                        - style = "margin-bottom: 0;"
+                    - else if (i == modLen - 2 && float == "left")
+                        - style = "margin-bottom: 0;"
+                    - else if (i == modLen - 1 && float == "right")
+                        - style = "margin-bottom: 0;"
+                    div.module(style="float: " + float + ";" + style onclick=`if (event.target != this.getElementsByTagName("input")[0]) {window.location.href = '/server/${user.id}/${guild.id}/module/${mod}'}`)
+                        div
+                            div
+                                b= titleCase(mod)
+                            input.toggle(type="checkbox" disabled=(mod == "base") checked=value.enabled onclick=`setModule('${mod}', ${!value.enabled}, '${user.id}', '${guild.id}')`)
+                    - i++
+        .content
+            h1 Roles Permissions
+            #roles
+                - let roleI = 0
+                each role in roles
+                    - let rolestyle = ""
+                    - let rolefloat = "left";
+                    - if (roleI % 2 != 0)
+                        - rolefloat = "right";
+                    - let modLen = Object.keys(roles).length
+                    - if (roleI == modLen - 1 && rolefloat == "left")
+                        - rolestyle = "margin-bottom: 0;"
+                    - else if (roleI == modLen - 2 && rolefloat == "left")
+                        - rolestyle = "margin-bottom: 0;"
+                    - else if (roleI == modLen - 1 && rolefloat == "right")
+                        - rolestyle = "margin-bottom: 0;"
+                    div.halfButton(style="float: "+ rolefloat + ";" + rolestyle type="text" onclick=`location.href = '/server/${user.id}/${guild.id}/role/${role.id}'`)
+                        div
+                            b(style="color: #" + role.color.toString(16))= "@" + role.name.replace("@", "")
+                    - roleI++
+        .content
+            h1 Channels
+            #channels
+                - let chanI = 0
+                each channel in channels
+                    - let chanstyle = ""
+                    - let chanfloat = "left";
+                    - if (chanI % 2 != 0)
+                        - chanfloat = "right";
+                    - let modLen = Object.keys(channels).length
+                    - if (chanI == modLen - 1 && chanfloat == "left")
+                        - chanstyle = "margin-bottom: 0;"
+                    - else if (chanI == modLen - 2 && chanfloat == "left")
+                        - chanstyle = "margin-bottom: 0;"
+                    - else if (chanI == modLen - 1 && chanfloat == "right")
+                        - chanstyle = "margin-bottom: 0;"
+                    div.halfButton(style="float: "+ chanfloat + ";" + chanstyle type="text" onclick=`location.href = '/server/${user.id}/${guild.id}/channel/${channel.id}'`)
+                        div
+                            b= "#" + channel.name
+                    - chanI++

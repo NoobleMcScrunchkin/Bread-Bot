@@ -1,0 +1,79 @@
+doctype html
+include includes/tools.pug
+head
+    title BreadBot
+    link(rel='stylesheet', href='/public/css/base.css')
+    link(rel='stylesheet', href='/public/css/module.css')
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    script(src="/public/js/module.js")
+    script(src="/public/js/base.js")
+body
+    #navButton(onclick="showNav()")
+        .navButtonLine
+        .navButtonLine
+        .navButtonLine
+    #nav
+        ul(class="navBar")
+            li
+                a(class="" href="/")
+                    b Bread Bot
+            li
+                a(class="" href="/servers") Servers
+            li
+                a(class="" href="/about") About
+            li(class="navRight")
+                if login
+                    a(class="" href=`https://discord.com/api/oauth2/authorize?client_id=${clientID}&redirect_uri=${redirectUri}&response_type=code&scope=identify%20email%20guilds`) Login
+                else
+                    if user
+                        a(id="user" href="/logout")
+                            span= user.username
+            
+    #main
+        a(style="color: white; text-decoration: none;" href=`/server/${user.id}/${guild.id}`)
+            h1.title= titleCase(`${guild.name}`)
+        .content
+            h1= titleCase(module)
+            each descs, prop in moduleProp.properties
+                div.prop(id=prop)
+                    b.prop= descs.title
+                    if descs.type == "role" 
+                        - currentRole = roles.find((role) => role.id == fields[prop]);
+                        - roleVal = descs.description;
+                        if currentRole
+                            - roleVal = "@" + currentRole.name;
+                        input.propInp(type="text" placeholder=roleVal onkeyup=`roleAuto(this, event, '${user.id}', '${guild.id}')` onclick=`event.preventDefault(); roleAuto(this, false, '${user.id}', '${guild.id}')`)
+                        br
+                        div.autoSelect(id=prop+"inpSel")
+                            div.autoTitle
+                                b Roles
+                            div.autoInp(id=prop+"inp")
+                    else if descs.type == "textChannel"
+                        - currentChannel = textChannels.find((channel) => channel.id == fields[prop]);
+                        - channelVal = descs.description;
+                        if currentChannel
+                            - channelVal = "#" + currentChannel.name;
+                        input.propInp(type="text" placeholder=channelVal onkeyup=`textChannelAuto(this, event, '${user.id}', '${guild.id}')` onclick=`event.preventDefault(); textChannelAuto(this, false, '${user.id}', '${guild.id}')`)
+                        br
+                        div.autoSelect(id=prop+"inpSel")
+                            div.autoTitle
+                                b Text Channels
+                            div.autoInp(id=prop+"inp")
+                    else if descs.type == "text"
+                        - textVal = fields[prop];
+                        input.propInp(type="text" placeholder=textVal onclick="clearAuto();" onkeydown=`if (event.keyCode == 13) {setField('${prop}', this.value, '${user.id}', '${guild.id}')}`)
+                    else if descs.type == "list"
+                        - listVal = fields[prop].join(", ");
+                        input.propInp(type="text" value=listVal placeholder=descs.description onclick="clearAuto();" onkeydown=`if (event.keyCode == 13) {setField('${prop}', this.value, '${user.id}', '${guild.id}')}`)
+                    else if descs.type == "boolean"
+                        - value = fields[prop];
+                        input.toggle(type="checkbox" checked=value onclick=`setTimeout(() => {setField('${prop}', ${!value}, '${user.id}', '${guild.id}')}, 300)`)
+                    else if descs.type == "integer"
+                        - textVal = fields[prop];
+                        input.propInp(type="text" placeholder=descs.description value=textVal onclick="clearAuto();" onkeydown=`if (event.keyCode == 13) {setField('${prop}', this.value, '${user.id}', '${guild.id}')}`)
+            - if (Object.keys(moduleProp.properties) == 0)
+                h2(style="margin-bottom: 0") This module has no properties.           
+
+script.
+    let rolesArr = JSON.parse(`!{JSON.stringify(roles)}`);
+    let channelsArr = JSON.parse(`!{JSON.stringify(textChannels)}`);

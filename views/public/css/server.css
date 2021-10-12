@@ -1,0 +1,89 @@
+.content #modules .module {
+    width: 48%;
+    height: auto;
+    background-color: #383838;
+    display: inline-block;
+    border-radius: 8px;
+    border: 1px solid #444;
+    margin-bottom: 16px;
+    cursor: pointer;
+}
+
+.content #modules .module div {
+    margin: 12px;
+    position: relative;
+}
+
+.content #modules .module div div {
+    overflow: hidden;
+    display: inline;
+    width: 100%;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.content #modules .module div div b {
+    font-size: 1.4em;
+    white-space: nowrap;
+}
+
+.content .halfButton {
+    width: 48%;
+    height: auto;
+    background-color: #383838;
+    display: inline-block;
+    border-radius: 8px;
+    border: 1px solid #444;
+    margin-bottom: 16px;
+    cursor: pointer;
+}
+
+.content .halfButton div {
+    position: relative;
+    margin: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.content .halfButton div b {
+    font-size: 1.4em;
+}
+
+.toggle {
+    float: right;
+    right: 0px;
+}
+
+#channels {
+    width: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+    .content #modules .module div div b {
+        font-size: 1.1em;
+    }
+
+    .content #channels .channel div b {
+        font-size: 1.1em;
+    }
+    .content #modules .module div div b::after {
+        content: "\a";
+    }
+
+    .content #modules .module div div {
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .toggle {
+        position: relative;
+        float: left;
+        margin-top: 8px;
+        margin-left: 0px;
+    }
+}

@@ -1,0 +1,52 @@
+doctype html
+head
+    title Servers
+    script(src='/public/js/servers.js')
+    link(rel='stylesheet', href='/public/css/base.css')
+    link(rel='stylesheet', href='/public/css/servers.css')
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    script(src="/public/js/base.js")
+body
+    #navButton(onclick="showNav()")
+        .navButtonLine
+        .navButtonLine
+        .navButtonLine
+    #nav
+        ul(class="navBar")
+            li
+                a(class="" href="/")
+                    b Bread Bot
+            li
+                a(class="" href="/servers") Servers
+            li
+                a(class="" href="/about") About
+            if user
+                li(class="navRight")
+                    a(id="user" href="/logout")
+                        span= user.username
+            
+    #main
+        h1.title Servers
+        .content
+            - if (userGuilds.length != 0)
+                
+                ul(class="servers")
+                    each val in userGuilds
+                        li
+                            if val.icon != null
+                                img(class="guildImg" src=`https://cdn.discordapp.com/icons/${val.id}/${val.icon}.png?size=64`)
+                            else 
+                                - let iconStr = "";
+                                - val.name.split(" ").forEach((str) => { iconStr += str[0];});
+                                - iconStr = iconStr.substring(0, 2);
+                                div(class="guildImg")
+                                    span= iconStr
+                            div
+                                b= val.name
+                            if botGuilds.includes(val.id)
+                                button.serverDash(onclick=`window.location.href = '/server/${user.id}/${val.id}'`) Dashboard
+                            else
+                                button.serverInv(onclick=`popupInvite('${val.id}', '${user.id}', '${clientID}', '${redirectUri}')`) Invite
+            - else
+                h1 No Servers!
+                    

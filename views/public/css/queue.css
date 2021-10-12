@@ -1,0 +1,32 @@
+.song {
+    width: 100%;
+    display: block;
+    overflow: auto;
+}
+
+.thumb {
+    float: left;
+    box-sizing: border-box;
+    width: 25%;
+    height: auto;
+    padding: 4px;
+}
+
+.thumb img {
+    width: 100%;
+}
+
+.info {
+    box-sizing: border-box;
+    float: right;
+    width: 75%;
+    padding: 4px 8px
+}
+
+.info h3 {
+    margin: 0 0 4px 0;
+}
+
+.info a {
+    color: white;
+}

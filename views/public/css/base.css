@@ -1,0 +1,241 @@
+#nav {
+    display: block;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #222;
+}
+
+#navButton {
+    display: none;
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    z-index: 1;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+#navButton .navButtonLine {
+    position: relative;
+    width: 100%;
+    height: 4px;
+    background-color: white;
+    margin: 6px 0;
+    border-radius: 4px;
+}
+
+#nav #user:hover::after {
+    content: "Logout";
+}
+
+#nav #user:hover span {
+    display: none;
+}
+
+#nav .navBar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#nav .navBar li {
+    float: left;
+}
+
+#nav .navBar .navRight {
+    float: right;
+}
+
+#nav .navBar li a {
+    display: block;
+    color: white;
+    font-size: 125%;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#nav .navBar li a:hover {
+  background-color: #111;
+}
+
+#main {
+    margin: 0;
+    margin-top: 70px;
+    width: 100%;
+    position: relative;
+}
+
+.content {
+    position: relative;
+    display: table;
+    width: 70%;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #333;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    border: 2px solid #444;
+}
+
+.toggle {
+    margin-top: 0;
+    margin-bottom: 16px;
+    float: right;
+    right: 30px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 62px;
+    height: 32px;
+    display: inline-block;
+    position: absolute;
+    border-radius: 50px;
+    overflow: hidden;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    background-color: #707070;
+    transition: background-color ease 0.3s;
+}
+
+.toggle:before {
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: 2;
+    width: 28px;
+    height: 28px;
+    background: #fff;
+    left: 2px;
+    top: 2px;
+    border-radius: 50%;
+    font: 10px/28px Helvetica;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-indent: -22px;
+    word-spacing: 37px;
+    color: #fff;
+    text-shadow: -1px -1px rgba(0,0,0,0.15);
+    white-space: nowrap;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    transition: all cubic-bezier(0.3, 1.5, 0.7, 1) 0.3s;
+}
+
+.toggle:checked {
+    background-color: #4CD964;
+}
+
+.toggle:checked:before {
+    left: 32px;
+}
+
+
+.content .prop {
+    width: 100%;
+    font-size: 1.2em;
+    margin: 6px 0;
+}
+
+.content h1 {
+    border-bottom: 1px solid #444;
+    padding: 15px;
+    margin: -30px -30px 16px -30px;
+}
+
+#mainBottom {
+    position: absolute;
+    right: 0;
+    left: 0px;
+    bottom: 0px;
+    height: auto;
+    margin: 8px;
+    padding: 8px;
+}
+
+#main .title{
+    margin-top: 0;
+    text-align:center;
+}
+
+body {
+    color: white;
+    background-color: #282828;
+    font-family: Roboto,Source Sans Pro,Calibri,Arial,sans-serif;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+input {
+    box-sizing: border-box;
+}
+
+.notransition {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -o-transition: none !important;
+    transition: none !important;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+
+  }
+
+  #nav .navBar li {
+      float: none;
+  }
+
+  #navButton {
+      display: block;
+  }
+
+  #nav #user:before {
+      content: "Logout";
+  }
+  #nav #user:hover:after {
+      content: "";
+  }
+
+  #nav #user span {
+      display: none;
+  }
+
+  #nav {
+      -webkit-transition: left 0.2s;
+      -moz-transition: left 0.2s;
+      -o-transition: left 0.2s;
+      transition: left 0.2s;
+      width: 50%;
+      height: 100%;
+      left: -50%;
+      position: fixed;
+      z-index: 1;
+  }
+
+  #nav .navBar li a {
+      text-align: left;
+      font-size: 200%;
+  }
+
+  #nav .navBar .navRight {
+      float: none;
+  }
+
+  #main {
+      z-index: 0;
+      margin: 0;
+      margin-top: 20px;
+      width: 100%;
+      position: relative;
+  }
+}

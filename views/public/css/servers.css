@@ -1,0 +1,103 @@
+.content .servers {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    text-align:center;
+    margin:0 auto;
+}
+
+.content .servers li {
+    width: 100%;
+    display: inline-block;
+    position: relative;
+    height: auto;
+}
+
+.content .servers li div {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    white-space: nowrap;
+    margin: 0;
+    margin-left: 16px;
+    width: 40%;
+    float: left;
+    min-height: 10px;
+}
+
+.content .servers li div b {
+    float: left;
+    display: inline;
+    margin: 32px 0;
+    padding-left: 0;
+    font-size: 1.2em;
+}
+
+.content .servers li .guildImg {
+    height: 64px;
+    width: 64px;
+    float: left;
+    margin: 11px 0;
+    border-radius: 50%;
+    border: 2px solid #555;
+    background-color: #2f3136;
+}
+
+.content .servers li .guildImg span {
+    font-size: 2em;
+    text-align: center;
+    line-height: 64px;
+}
+
+.content .servers li button {
+    color: white;
+    font-weight: bold;
+    float: right;
+    width: 30%;
+    height: 125%;
+    margin: 26px 0;
+    padding: 12px 0;
+    border: 1px solid white;
+    border-radius: 8px;
+    background-color: #282828;
+    transition: background-color 0.1s linear;
+}
+
+.content .servers li .serverInv:hover {
+    background-color: #2ab685;
+}
+
+.content .servers li .serverDash:hover {
+    background-color: #3e9bed;
+}
+
+@media only screen and (max-width: 600px) {
+    .content .servers li div b {
+        float: left;
+        display: inline;
+        margin: 16px 0;
+        padding-left: 0;
+        font-size: 1.1em;
+    }
+
+    .content .servers li div {
+        margin-left: 8px;
+    }
+
+    .content .servers li .guildImg {
+        height: 32px;
+        width: 32px;
+    }
+
+    .content .servers li .guildImg span {
+        font-size: 1em;
+        line-height: 32px;
+    }
+
+    .content .servers li button {
+        margin: 13px 0;
+        padding: 6px;
+        overflow: hidden;
+    }
+}

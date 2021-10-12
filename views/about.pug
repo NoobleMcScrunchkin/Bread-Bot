@@ -1,0 +1,32 @@
+doctype html
+head
+    title BreadBot
+    link(rel='stylesheet', href='/public/css/base.css')
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    script(src="/public/js/base.js")
+body
+    #navButton(onclick="showNav()")
+        .navButtonLine
+        .navButtonLine
+        .navButtonLine
+    #nav
+        ul(class="navBar")
+            li
+                a(class="" href="/")
+                    b Bread Bot
+            li
+                a(class="" href="/servers") Servers
+            li
+                a(class="" href="/about") About
+            li(class="navRight")
+                if login
+                    a(class="" href=`https://discord.com/api/oauth2/authorize?client_id=${clientID}&redirect_uri=${redirectUri}&response_type=code&scope=identify%20email%20guilds`) Login
+                else
+                    if user
+                        a(id="user" href="/logout")
+                            span= user.username
+            
+    #main
+        h1.title About
+        .content
+            | PlaceHolder

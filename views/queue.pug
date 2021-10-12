@@ -1,0 +1,58 @@
+doctype html
+head
+    title BreadBot
+    link(rel='stylesheet', href='/public/css/base.css')
+    link(rel='stylesheet', href='/public/css/queue.css')
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    script(src="/public/js/base.js")
+    script(src="/public/js/queue.js")
+    script(src="/public/js/socket.io.js")
+body
+    #navButton(onclick="showNav()")
+        .navButtonLine
+        .navButtonLine
+        .navButtonLine
+    #nav
+        ul(class="navBar")
+            li
+                a(class="" href="/")
+                    b Bread Bot
+            li
+                a(class="" href="/servers") Servers
+            li
+                a(class="" href="/about") About
+            li(class="navRight")
+                if login
+                    a(class="" href=`https://discord.com/api/oauth2/authorize?client_id=${clientID}&redirect_uri=${redirectUri}&response_type=code&scope=identify%20email%20guilds`) Login
+                else
+                    if user
+                        a(id="user" href="/logout")
+                            span= user.username
+
+    #main
+        h1.title= queue.guild + " - Queue"
+        - if (queue.currentSong)
+            .content
+                h1 Current Song
+                .song
+                    .thumb
+                        img(src="https://img.youtube.com/vi/" + queue.currentSong.id + "/0.jpg")
+                    .info
+                        h3 Title:
+                        a(href=queue.currentSong.content)
+                            b= queue.currentSong.title
+        - if (queue.queue && queue.queue.length)
+            .content
+                h1 Up Next
+                for song in queue.queue
+                    .song
+                        .thumb
+                            img(src="https://img.youtube.com/vi/" + song.id + "/0.jpg")
+                        .info
+                            h3 Title:
+                            a(href=song.content)
+                                b= song.title
+        - if (!queue.currentSong && !queue.queue)
+            .content
+                h1 Nothing Playing
+                b Use the !yt command to add songs to the queue!
